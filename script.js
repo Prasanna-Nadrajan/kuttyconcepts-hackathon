@@ -464,14 +464,14 @@ document.addEventListener("DOMContentLoaded", () => {
         // Find a natural sounding English voice
         // Find an Indian English voice
         const voices = synth.getVoices();
-        const preferredVoice = voices.find(v => (v.lang === 'en-IN' || v.name.includes('India')) && (v.name.toLowerCase().includes('male') || v.name.includes('Ravi') || v.name.includes('Rishi') || v.name.includes('Prabhat'))) ||
-                               voices.find(v => v.name.includes('Ravi') || v.name.includes('Rishi')) ||
-                               voices.find(v => (v.lang === 'en-IN' || v.name.includes('India')) && !v.name.toLowerCase().includes('female') && !v.name.toLowerCase().includes('veena') && !v.name.toLowerCase().includes('lekha') && !v.name.toLowerCase().includes('neerja')) ||
-                               voices.find(v => v.name.includes('Google UK English Male')) ||
-                               voices.find(v => v.name.includes('Daniel') || v.name.includes('Alex') || v.name.includes('Arthur')) ||
-                               voices.find(v => v.name.toLowerCase().includes('male') && v.lang.startsWith('en')) ||
-                               voices.find(v => v.lang === 'en-IN') || // fallback to any Indian if no male found
-                               voices.find(v => v.lang === 'en-GB' || v.lang === 'en-US') || 
+        const preferredVoice = voices.find(v => v.name.includes('Google US English Male')) ||
+                               voices.find(v => v.name.includes('David') && v.lang.includes('en-US')) ||
+                               voices.find(v => v.name.includes('Alex') && v.lang.includes('en-US')) ||
+                               voices.find(v => v.name.includes('Fred') && v.lang.includes('en-US')) ||
+                               voices.find(v => v.name.includes('Matthew') || v.name.includes('Joey') || v.name.includes('Justin')) ||
+                               voices.find(v => v.lang === 'en-US' && v.name.toLowerCase().includes('male')) ||
+                               voices.find(v => v.lang === 'en-US' && !v.name.toLowerCase().includes('female') && !v.name.includes('Zira') && !v.name.includes('Samantha') && !v.name.includes('Victoria')) ||
+                               voices.find(v => v.lang === 'en-US') ||
                                voices[0];
                                
         if (preferredVoice) utterance.voice = preferredVoice;
