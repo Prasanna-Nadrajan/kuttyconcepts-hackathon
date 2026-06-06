@@ -282,6 +282,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const cinema = document.getElementById('cinema');
     const finaleScreen = document.getElementById('finaleScreen');
     const replayBtn = document.getElementById('replayBtn');
+    const downloadNotesBtn = document.getElementById('downloadNotesBtn');
     
     const aadhiImg = document.getElementById('aadhiImg');
     const holoContent = document.getElementById('holoContent');
@@ -347,6 +348,24 @@ document.addEventListener("DOMContentLoaded", () => {
         if(synth) synth.cancel();
         mainTimeline.restart();
     });
+
+    if (downloadNotesBtn) {
+        downloadNotesBtn.addEventListener('click', () => {
+            let notesContent = "=== MEMORY MANAGEMENT NOTES ===\n\n";
+            scenes.forEach(scene => {
+                notesContent += `[Scene ${scene.num}: ${scene.heading}]\n${scene.text}\n\n`;
+            });
+            notesContent += "=================================\nAll the best, REC students! — Aadhi\n";
+            
+            const blob = new Blob([notesContent], { type: "text/plain" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "Memory_Management_Notes.txt";
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+    }
 
     // --- Core Animation Engine ---
     function buildTimeline() {
@@ -443,8 +462,11 @@ document.addEventListener("DOMContentLoaded", () => {
         utterance = new SpeechSynthesisUtterance(text);
         
         // Find a natural sounding English voice
+        // Find an Indian English voice
         const voices = synth.getVoices();
-        const preferredVoice = voices.find(v => v.name.includes('Google UK English Male')) ||
+        const preferredVoice = voices.find(v => v.lang === 'en-IN') ||
+                               voices.find(v => v.name.includes('India')) ||
+                               voices.find(v => v.name.includes('Google UK English Male')) ||
                                voices.find(v => v.name.includes('Google US English')) ||
                                voices.find(v => v.name.includes('Microsoft') && v.lang.includes('en')) ||
                                voices.find(v => v.name.includes('Samantha') || v.name.includes('Daniel') || v.name.includes('Alex')) ||
