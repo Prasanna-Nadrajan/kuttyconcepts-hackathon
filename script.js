@@ -348,6 +348,8 @@ document.addEventListener("DOMContentLoaded", () => {
     
     const pauseBtn = document.getElementById('pauseBtn');
     const pauseIcon = document.getElementById('pauseIcon');
+    const prevSceneBtn = document.getElementById('prevSceneBtn');
+    const nextSceneBtn = document.getElementById('nextSceneBtn');
     const muteBtn = document.getElementById('muteBtn');
     const muteIcon = document.getElementById('muteIcon');
     const cameraContainer = document.getElementById('cameraContainer');
@@ -495,7 +497,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                
         if (preferredVoice) utterance.voice = preferredVoice;
         
-        utterance.rate = 1.0; // Normal speed
+        utterance.rate = 0.85; // Slower speed to prevent staggering
         utterance.pitch = 1.0; // Normal pitch to prevent distortion
         
         synth.speak(utterance);
@@ -528,6 +530,26 @@ document.addEventListener("DOMContentLoaded", () => {
             mainTimeline.play();
             if(synth) synth.resume();
             pauseIcon.classList.replace('fa-play', 'fa-pause');
+        }
+    });
+
+    prevSceneBtn.addEventListener('click', () => {
+        if (!mainTimeline) return;
+        let currentSceneIndex = Math.floor(mainTimeline.time() / 10);
+        if (currentSceneIndex > 0) {
+            if (synth) synth.cancel();
+            mainTimeline.seek((currentSceneIndex - 1) * 10);
+            if (!isPaused) mainTimeline.play();
+        }
+    });
+
+    nextSceneBtn.addEventListener('click', () => {
+        if (!mainTimeline) return;
+        let currentSceneIndex = Math.floor(mainTimeline.time() / 10);
+        if (currentSceneIndex < scenes.length - 1) {
+            if (synth) synth.cancel();
+            mainTimeline.seek((currentSceneIndex + 1) * 10);
+            if (!isPaused) mainTimeline.play();
         }
     });
 
