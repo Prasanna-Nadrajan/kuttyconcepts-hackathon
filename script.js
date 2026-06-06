@@ -464,13 +464,13 @@ document.addEventListener("DOMContentLoaded", () => {
         // Find a natural sounding English voice
         // Find an Indian English voice
         const voices = synth.getVoices();
-        const preferredVoice = voices.find(v => v.lang === 'en-IN') ||
-                               voices.find(v => v.name.includes('India')) ||
+        const preferredVoice = voices.find(v => (v.lang === 'en-IN' || v.name.includes('India')) && (v.name.toLowerCase().includes('male') || v.name.includes('Ravi') || v.name.includes('Rishi') || v.name.includes('Prabhat'))) ||
+                               voices.find(v => v.name.includes('Ravi') || v.name.includes('Rishi')) ||
+                               voices.find(v => (v.lang === 'en-IN' || v.name.includes('India')) && !v.name.toLowerCase().includes('female') && !v.name.toLowerCase().includes('veena') && !v.name.toLowerCase().includes('lekha') && !v.name.toLowerCase().includes('neerja')) ||
                                voices.find(v => v.name.includes('Google UK English Male')) ||
-                               voices.find(v => v.name.includes('Google US English')) ||
-                               voices.find(v => v.name.includes('Microsoft') && v.lang.includes('en')) ||
-                               voices.find(v => v.name.includes('Samantha') || v.name.includes('Daniel') || v.name.includes('Alex')) ||
-                               voices.find(v => v.lang.startsWith('en') && !v.localService) || // Prefer cloud voices if available
+                               voices.find(v => v.name.includes('Daniel') || v.name.includes('Alex') || v.name.includes('Arthur')) ||
+                               voices.find(v => v.name.toLowerCase().includes('male') && v.lang.startsWith('en')) ||
+                               voices.find(v => v.lang === 'en-IN') || // fallback to any Indian if no male found
                                voices.find(v => v.lang === 'en-GB' || v.lang === 'en-US') || 
                                voices[0];
                                
