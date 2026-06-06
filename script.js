@@ -24,275 +24,140 @@ const mascotImages = [
 // Map of scenes from script
 const scenes = [
     {
-        num: 1, section: "INTRO", duration: 10,
-        text: "Hey there, REC students! I'm Aadhi, your campus mascot — and today, I'm going to break down Operating Systems for you in just five minutes! Let's get started!",
-        mascot: "happy", heading: "OPERATING SYSTEMS",
-        html: `<h2>Explained by Aadhi</h2><h3>Rajalakshmi Engineering College</h3>`
+        num: 1, section: "INTRO", duration: 20,
+        text: "Welcome back! Today, we are diving deep into the most critical balancing act your OS performs: Memory Management. Imagine your RAM is just a shared, physical study desk.",
+        mascot: "happy", heading: "Memory Management",
+        html: `<div class="ram-desk-container"><div class="ram-desk empty"></div></div><p class="highlight" style="margin-top:2rem; text-align:center;">Your RAM is like a physical desk.</p>`
     },
     {
-        num: 2, section: "INTRO", duration: 10,
-        text: "Here's our roadmap! We'll cover what an OS is, its functions, process management, memory, file systems, CPU scheduling, deadlocks, synchronization, and types of OS. Let's dive in!",
-        mascot: "lecturing", heading: "Today's Agenda",
-        html: `<ul style="font-size:1.1rem"><li>What is an OS?</li><li>Functions of OS</li><li>Process Management</li><li>Memory Management</li><li>File Systems</li><li>CPU Scheduling</li><li>Deadlocks</li><li>Synchronization</li><li>Types of OS</li></ul>`
+        num: 2, section: "CHAOS", duration: 20,
+        text: "When you open programs on your computer, they need space to work. Watch what happens as multiple applications pile onto our desk all at once.",
+        mascot: "concerned", heading: "The Chaotic Apps",
+        html: `<div class="ram-desk-container"><div class="ram-desk messy"><div class="app-block app-blue" style="width:100px; left:10px; top:10px">App 1</div><div class="app-block app-red" style="width:150px; left:40px; top:30px">App 2</div><div class="app-block app-green" style="width:80px; left:120px; top:5px">App 3</div></div></div>`
     },
     {
-        num: 3, section: "WHAT IS OS", duration: 10,
-        text: "So, what exactly is an Operating System? It's the software that sits between YOU and the hardware. It manages everything — from your apps to the CPU and memory!",
-        mascot: "lecturing", heading: "What is an OS?",
-        html: `<div class="layer-diagram">
-            <div class="layer-box" style="border-color:#fff">USER</div>
-            <i class="fas fa-arrow-down layer-arrow"></i>
-            <div class="layer-box" style="border-color:var(--cyan); color:var(--cyan)">APPLICATION</div>
-            <i class="fas fa-arrow-down layer-arrow"></i>
-            <div class="layer-box" style="background:rgba(139,92,246,0.3); border-color:#8b5cf6">OPERATING SYSTEM</div>
-            <i class="fas fa-arrow-down layer-arrow"></i>
-            <div class="layer-box" style="border-color:#666">HARDWARE</div>
+        num: 3, section: "CONTIGUOUS", duration: 20,
+        text: "Early systems used something called contiguous allocation. This meant giving every single app one massive, solid chunk of unbroken space on the desk.",
+        mascot: "lecturing", heading: "Contiguous Allocation",
+        html: `<div class="ram-desk-container"><div class="ram-desk ordered"><div class="app-bar app-blue" style="width:30%">App 1</div><div class="app-bar app-red" style="width:40%">App 2</div><div class="app-bar app-green" style="width:20%">App 3</div></div></div>`
+    },
+    {
+        num: 4, section: "FRAGMENTATION", duration: 20,
+        text: "But here is the problem. As you open and close different apps all day long, they leave behind tiny, disconnected, unusable gaps of space. We call this Fragmentation.",
+        mascot: "lecturing", heading: "Fragmentation Appears",
+        html: `<div class="ram-desk-container"><div class="ram-desk ordered"><div class="app-bar app-blue" style="width:30%">App 1</div><div class="app-gap" style="width:15%"></div><div class="app-bar app-red" style="width:25%">App 2</div><div class="app-gap" style="width:10%"></div><div class="app-bar app-green" style="width:20%">App 3</div></div></div><p class="highlight" style="margin-top:1rem; color:#f87171; text-align:center;">External Fragmentation: Gaps of unused space.</p>`
+    },
+    {
+        num: 5, section: "THE ERROR", duration: 20,
+        text: "Now, what happens if you try to open a massive new video editing program? Even if you have enough total free space, it won't fit because the space is broken up!",
+        mascot: "confused", heading: "The Error",
+        html: `<div class="ram-desk-container"><div class="ram-desk ordered"><div class="app-bar app-blue" style="width:30%">App 1</div><div class="app-gap" style="width:15%"></div><div class="app-bar app-red" style="width:25%">App 2</div><div class="app-gap" style="width:10%"></div><div class="app-bar app-green" style="width:20%">App 3</div></div></div>
+        <div class="massive-app error-shake" style="margin-top:1rem">Massive Video Editor (Needs 25%)</div>`
+    },
+    {
+        num: 6, section: "PAGING", duration: 20,
+        text: "To fix this completely, the OS invented Paging! First, it slices up your physical RAM into small, perfectly equal-sized blocks known as 'Frames'.",
+        mascot: "confident", heading: "The Solution: Paging",
+        html: `<div class="ram-desk-container"><div class="ram-desk ordered paged"><div class="frame"></div><div class="frame"></div><div class="frame"></div><div class="frame"></div><div class="frame"></div><div class="frame"></div><div class="frame"></div><div class="frame"></div><div class="frame"></div><div class="frame"></div></div></div><p class="highlight" style="margin-top:1rem; text-align:center;">Physical RAM divided into exactly equal "Frames"</p>`
+    },
+    {
+        num: 7, section: "PAGING", duration: 20,
+        text: "Next, it takes that massive video editing app you wanted to open, and it slices the app itself into matching, equal-sized blocks called 'Pages'.",
+        mascot: "confident", heading: "Slicing the App",
+        html: `<div class="massive-app sliced">
+            <div class="page-block">Page 1</div>
+            <div class="page-block">Page 2</div>
+            <div class="page-block">Page 3</div>
+            <div class="page-block">Page 4</div>
         </div>`
     },
     {
-        num: 4, section: "WHAT IS OS", duration: 10,
-        text: "Think of the OS as a translator! When you click an app, the OS talks to the hardware to make it happen. Without it, your computer is just a pile of circuits!",
-        mascot: "confident", heading: "OS as an Intermediary",
-        html: `<h3 style="text-align:center; font-size:1.5rem"><i class="fas fa-language"></i> Translates requests into hardware actions</h3><p style="text-align:center; margin-top:2rem; font-size:1.2rem">User ⇄ App ⇄ <span class="highlight">OS</span> ⇄ Hardware</p>`
+        num: 8, section: "PAGING", duration: 20,
+        text: "Now for the magic! Because the pieces are the same size, the OS can scatter the app's pages into any available, non-adjacent frames in RAM. It fits perfectly!",
+        mascot: "celebrating success", heading: "A Perfect Fit",
+        html: `<div class="ram-desk-container"><div class="ram-desk ordered paged">
+            <div class="frame blue-f">A1</div><div class="frame orange-f">P1</div><div class="frame blue-f">A1</div><div class="frame orange-f">P2</div>
+            <div class="frame red-f">A2</div><div class="frame red-f">A2</div><div class="frame orange-f">P3</div><div class="frame green-f">A3</div>
+            <div class="frame green-f">A3</div><div class="frame orange-f">P4</div>
+        </div></div><p class="highlight" style="margin-top:1rem; color:#4ade80; text-align:center;">No more external fragmentation!</p>`
     },
     {
-        num: 5, section: "WHAT IS OS", duration: 10,
-        text: "You use an OS every day! Windows, macOS, Linux, Android — they're all operating systems. Each one manages your device differently, but the core idea is the same!",
-        mascot: "happy", heading: "Examples of OS",
-        html: `<div class="os-icons-row" style="margin-top:2rem">
-            <div class="os-icon-item"><i class="fab fa-windows"></i><span>Windows</span></div>
-            <div class="os-icon-item"><i class="fab fa-apple"></i><span>macOS</span></div>
-            <div class="os-icon-item"><i class="fab fa-linux"></i><span>Linux</span></div>
-            <div class="os-icon-item"><i class="fab fa-android"></i><span>Android</span></div>
-        </div>`
+        num: 9, section: "VIRTUAL MEMORY", duration: 20,
+        text: "But wait... what if you open so many browser tabs that your RAM gets one hundred percent full? There are absolutely no frames left.",
+        mascot: "concerned", heading: "100% Capacity",
+        html: `<div class="ram-desk-container" style="position:relative"><div class="capacity-warning flashing">⚠️ 100% CAPACITY REACHED</div><div class="ram-desk ordered paged full-alert">
+            <div class="frame blue-f">A</div><div class="frame blue-f">A</div><div class="frame orange-f">B</div><div class="frame orange-f">B</div>
+            <div class="frame red-f">C</div><div class="frame red-f">C</div><div class="frame green-f">D</div><div class="frame green-f">D</div>
+            <div class="frame purple-f">E</div><div class="frame purple-f">E</div>
+        </div></div>`
     },
     {
-        num: 6, section: "FUNCTIONS", duration: 10,
-        text: "An OS does FIVE major things — it manages processes, memory, files, input-output devices, and security. Let's see each one!",
-        mascot: "lecturing", heading: "Key Functions of an OS",
-        html: `<div class="hub-diagram">
-            <div class="hub-center">OS</div>
-            <div style="display:flex; flex-direction:column; gap:0.5rem">
-                <div class="hub-branch">1. Process Mgmt</div>
-                <div class="hub-branch">2. Memory Mgmt</div>
-                <div class="hub-branch">3. File Mgmt</div>
-                <div class="hub-branch">4. I/O Mgmt</div>
-                <div class="hub-branch">5. Security</div>
+        num: 10, section: "VIRTUAL MEMORY", duration: 20,
+        text: "Don't panic! The OS uses Virtual Memory. It acts like a highly intelligent librarian, using a section of your Hard Drive as emergency backup RAM.",
+        mascot: "lecturing", heading: "Virtual Memory",
+        html: `<div class="virtual-memory-view">
+            <div class="ram-disk-split">
+                <div class="vm-ram"><i class="fas fa-memory"></i><br>Physical RAM<br><span style="font-size:0.7rem">(Full)</span></div>
+                <div class="vm-arrow"><i class="fas fa-exchange-alt"></i></div>
+                <div class="vm-hdd"><i class="fas fa-hdd"></i><br>Hard Drive<br><span style="font-size:0.7rem">(Emergency Swap Space)</span></div>
             </div>
         </div>`
     },
     {
-        num: 7, section: "FUNCTIONS", duration: 10,
-        text: "Resource allocation means the OS decides which app gets how much CPU, memory, and disk. It also handles all your input-output — keyboard, mouse, display, everything!",
-        mascot: "confident", heading: "Resource Allocation",
-        html: `<h3><i class="fas fa-microchip"></i> CPU, RAM, Disk → Apps</h3><br><h3><i class="fas fa-keyboard"></i> Keyboard, Mouse, Display</h3>`
+        num: 11, section: "VIRTUAL MEMORY", duration: 20,
+        text: "The OS finds pages from apps you haven't looked at in a while, and temporarily 'Swaps' them out to the Hard Drive. This frees up precious space!",
+        mascot: "lecturing", heading: "Paging Out (Swap Out)",
+        html: `<div class="virtual-memory-view">
+            <div class="ram-disk-split">
+                <div class="vm-ram"><div class="frame purple-f fade-out">E</div></div>
+                <div class="vm-arrow swap-out-anim">→</div>
+                <div class="vm-hdd"><div class="frame grey-f">E</div></div>
+            </div>
+        </div><p class="highlight" style="margin-top:1rem; text-align:center;">Old pages moved to disk.</p>`
     },
     {
-        num: 8, section: "FUNCTIONS", duration: 10,
-        text: "Security is crucial! The OS uses authentication — like passwords — access control to restrict files, and encryption to protect your data. Your OS is your digital bodyguard!",
-        mascot: "confident", heading: "Security & Protection",
-        html: `<div style="text-align:center; font-size:3rem; color:var(--cyan); margin-bottom:1rem"><i class="fas fa-shield-halved"></i></div>
-        <ul><li>Authentication (passwords)</li><li>Access Control (permissions)</li><li>Encryption (data protection)</li></ul>`
-    },
-    {
-        num: 9, section: "PROCESSES", duration: 10,
-        text: "A program sitting on your disk is just code — it's passive. But the moment you run it, it becomes a PROCESS — an active entity with its own memory and state!",
-        mascot: "lecturing", heading: "What is a Process?",
-        html: `<div class="comparison" style="margin-top:2rem">
-            <div class="compare-panel" style="text-align:center"><i class="fas fa-file-code" style="font-size:3rem; color:#888; margin-bottom:1rem"></i><h3>Program</h3><p style="color:#aaa">Passive (on disk)</p></div>
-            <div class="compare-panel" style="text-align:center; border-color:var(--cyan)"><i class="fas fa-cog fa-spin" style="font-size:3rem; color:var(--cyan); margin-bottom:1rem"></i><h3>Process</h3><p class="highlight">Active (in RAM)</p></div>
+        num: 12, section: "PAGE FAULT", duration: 20,
+        text: "If the CPU suddenly needs to use a page that was sent away to the disk, it throws an alert called a 'Page Fault'. The CPU has to stop and wait.",
+        mascot: "confident", heading: "Page Faults",
+        html: `<div class="cpu-alert-view">
+            <div class="cpu-icon fault-flash"><i class="fas fa-microchip"></i></div>
+            <div class="fault-text">PAGE FAULT!</div>
+            <p>CPU tried to access Page 'E', but it's on the Hard Drive!</p>
         </div>`
     },
     {
-        num: 10, section: "PROCESSES", duration: 10,
-        text: "Every process goes through states: New, Ready, Running, Waiting, and Terminated. The OS moves processes between these states to keep everything running smoothly!",
-        mascot: "lecturing", heading: "Process States",
-        html: `<div style="display:flex; flex-wrap:wrap; justify-content:center; gap:0.5rem; margin-top:2rem">
-            <span class="state-box" style="background:rgba(255,255,255,0.1)">New</span> <i class="fas fa-arrow-right layer-arrow"></i>
-            <span class="state-box" style="background:rgba(0,255,255,0.2); color:var(--cyan)">Ready</span> <i class="fas fa-arrow-right layer-arrow"></i>
-            <span class="state-box" style="background:rgba(139,92,246,0.3); color:#a78bfa">Running</span> <i class="fas fa-arrow-right layer-arrow"></i>
-            <span class="state-box" style="background:rgba(239,68,68,0.2); color:#f87171">Waiting</span> <i class="fas fa-arrow-right layer-arrow"></i>
-            <span class="state-box" style="background:rgba(100,100,100,0.3)">Terminated</span>
+        num: 13, section: "PAGE FAULT", duration: 20,
+        text: "The OS springs into action, fetches the missing page back from the slow Hard Drive, and swaps it back into a free space in fast RAM.",
+        mascot: "confident", heading: "Paging In (Swap In)",
+        html: `<div class="virtual-memory-view">
+            <div class="ram-disk-split">
+                <div class="vm-ram"><div class="frame purple-f">E</div></div>
+                <div class="vm-arrow swap-in-anim">←</div>
+                <div class="vm-hdd"><div class="frame grey-f fade-out">E</div></div>
+            </div>
+        </div><p class="highlight" style="margin-top:1rem; color:var(--cyan); text-align:center;">Page fetched back to RAM.</p>`
+    },
+    {
+        num: 14, section: "THRASHING", duration: 20,
+        text: "Be careful, though! Open too many heavy apps, and the OS spends all its time frantically swapping pages back and forth instead of working. This nightmare is called 'Thrashing'!",
+        mascot: "confused", heading: "Thrashing",
+        html: `<div class="virtual-memory-view">
+            <div class="ram-disk-split thrash-anim">
+                <div class="vm-ram thrash-box"></div>
+                <div class="vm-arrow thrash-arrows">⇄</div>
+                <div class="vm-hdd thrash-box"></div>
+            </div>
+        </div><div class="capacity-warning flashing" style="position:static; margin:1rem auto; width:fit-content; color:#fff; background:#f87171">CRITICAL SYSTEM HALT</div>`
+    },
+    {
+        num: 15, section: "CONCLUSION", duration: 20,
+        text: "When a system is thrashing, your entire computer grinds to a halt. So, treat your RAM well! It’s the ultimate digital Tetris master. Thanks for watching!",
+        mascot: "confident", heading: "Conclusion",
+        html: `<div style="text-align:center; padding-top:2rem">
+            <i class="fas fa-thumbs-up" style="font-size:4rem; color:var(--cyan); margin-bottom:1rem; animation:pulseGlow 2s infinite"></i>
+            <h3>You mastered Memory Management!</h3>
+            <p style="color:#aaa; font-size:0.9rem; margin-top:1rem">Aadhi is proud of you.</p>
         </div>`
-    },
-    {
-        num: 11, section: "PROCESSES", duration: 10,
-        text: "Each process has an ID card called the PCB — Process Control Block. It stores the process ID, current state, program counter, registers, and memory info. The OS uses this to track every process!",
-        mascot: "confident", heading: "Process Control Block (PCB)",
-        html: `<div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.2); border-radius:12px; padding:1.5rem; max-width:300px; margin:0 auto">
-            <h3 style="text-align:center; margin-top:0; border-bottom:1px solid #444; padding-bottom:0.5rem">ID Card: PCB</h3>
-            <ul style="font-size:0.9rem; margin-top:1rem"><li>Process ID</li><li>Process State</li><li>Program Counter</li><li>CPU Registers</li><li>Memory Info</li></ul>
-        </div>`
-    },
-    {
-        num: 12, section: "PROCESSES", duration: 10,
-        text: "Context switching is when the CPU saves one process's state and loads another. It happens so fast, you think everything runs at once — but the CPU is actually juggling!",
-        mascot: "inspired", heading: "Context Switching",
-        html: `<div style="text-align:center; font-size:2.5rem; margin:1rem 0"><i class="fas fa-exchange-alt" style="color:var(--cyan)"></i></div>
-        <p style="text-align:center; font-size:1.2rem">Save state of P1 <br>↓<br> Load state of P2</p><p style="text-align:center; margin-top:1rem" class="highlight">(Enables multitasking!)</p>`
-    },
-    {
-        num: 13, section: "MEMORY", duration: 10,
-        text: "Memory management is how the OS allocates and tracks RAM. It decides which process gets how much memory and makes sure they don't step on each other's toes!",
-        mascot: "lecturing", heading: "Memory Management",
-        html: `<div style="width:200px; height:150px; border:2px solid var(--cyan); border-radius:8px; margin:0 auto; display:flex; flex-direction:column; overflow:hidden">
-            <div style="flex:1; background:rgba(0,255,255,0.3); display:flex; align-items:center; justify-content:center; font-weight:bold">OS Area</div>
-            <div style="flex:2; border-top:1px dashed var(--cyan); display:flex; align-items:center; justify-content:center; color:#888">Free Space</div>
-            <div style="flex:1; background:rgba(139,92,246,0.4); border-top:1px solid var(--cyan); display:flex; align-items:center; justify-content:center">Process 1</div>
-        </div>`
-    },
-    {
-        num: 14, section: "MEMORY", duration: 10,
-        text: "Memory can be allocated in two ways — contiguous, where each process gets one continuous block, or non-contiguous, where it's split into pieces scattered across RAM!",
-        mascot: "lecturing", heading: "Memory Allocation",
-        html: `<div class="comparison">
-            <div class="compare-panel"><h3>Contiguous</h3><div style="height:60px; background:rgba(0,255,255,0.2); border:1px solid var(--cyan); border-radius:4px; display:flex; align-items:center; justify-content:center">1 Block</div></div>
-            <div class="compare-panel"><h3>Non-Contiguous</h3><div style="display:flex; gap:4px; height:60px"><div style="flex:1; background:rgba(139,92,246,0.3); border-radius:4px"></div><div style="flex:1; border:1px dashed #666; border-radius:4px"></div><div style="flex:1; background:rgba(139,92,246,0.3); border-radius:4px"></div></div></div>
-        </div>`
-    },
-    {
-        num: 15, section: "MEMORY", duration: 10,
-        text: "Paging divides memory into fixed-size blocks — pages for the process and frames for RAM. A page table maps which page goes into which frame. No external fragmentation!",
-        mascot: "happy", heading: "Paging",
-        html: `<ul><li>Process → Pages (fixed size)</li><li>RAM → Frames (fixed size)</li><li>Page Table maps Pages to Frames</li></ul><p class="highlight" style="text-align:center; margin-top:1rem">No external fragmentation!</p>`
-    },
-    {
-        num: 16, section: "MEMORY", duration: 10,
-        text: "Virtual memory lets you run programs larger than your actual RAM! The OS swaps pages between RAM and disk, creating an illusion of unlimited memory. Clever, right?",
-        mascot: "confident", heading: "Virtual Memory",
-        html: `<div style="text-align:center; font-size:3rem; margin-bottom:1rem">🧠 ⇄ 💽</div>
-        <ul><li>Larger than physical RAM</li><li>Uses disk as swap space</li><li>Pages swapped in/out as needed</li></ul>`
-    },
-    {
-        num: 17, section: "FILE SYSTEM", duration: 10,
-        text: "The file system organizes your data on disk! It uses a hierarchical tree structure — folders within folders — so you can store, find, and manage your files easily.",
-        mascot: "lecturing", heading: "File System",
-        html: `<div style="text-align:center; font-size:2rem; color:var(--cyan); margin-bottom:1rem"><i class="fas fa-folder-tree"></i></div>
-        <ul><li>Organizes data on disk</li><li>Hierarchical tree structure</li><li>Directories and files</li></ul>`
-    },
-    {
-        num: 18, section: "FILE SYSTEM", duration: 10,
-        text: "The OS provides operations like create, read, write, and delete for files. Access can be sequential — reading one record after another — or direct, jumping to any position!",
-        mascot: "lecturing", heading: "File Operations",
-        html: `<p style="text-align:center; font-weight:bold; color:var(--cyan); letter-spacing:2px; margin-bottom:1.5rem">CREATE | READ | WRITE | DELETE</p>
-        <div class="comparison">
-            <div class="compare-panel"><h3>Sequential</h3><p style="font-size:0.8rem;text-align:center">Record after record</p></div>
-            <div class="compare-panel"><h3>Direct (Random)</h3><p style="font-size:0.8rem;text-align:center">Jump to position</p></div>
-        </div>`
-    },
-    {
-        num: 19, section: "FILE SYSTEM", duration: 10,
-        text: "Files are stored on disk using three methods — Contiguous allocation, Linked allocation with pointers, and Indexed allocation using an index block. Each has its trade-offs!",
-        mascot: "confident", heading: "Disk Allocation Methods",
-        html: `<ol style="font-size:1.2rem; line-height:2; width:fit-content; margin:0 auto">
-            <li>Contiguous</li><li>Linked (pointers)</li><li>Indexed (index block)</li>
-        </ol>`
-    },
-    {
-        num: 20, section: "CPU SCHED", duration: 10,
-        text: "CPU scheduling decides which process gets the CPU and when. Multiple processes compete for the CPU, and the scheduler picks the winner!",
-        mascot: "confident", heading: "CPU Scheduling",
-        html: `<div style="display:flex; align-items:center; justify-content:center; gap:1rem; margin-bottom:2rem">
-            <div style="background:rgba(255,255,255,0.1); padding:0.5rem; border-radius:8px">P1, P2, P3</div>
-            <i class="fas fa-arrow-right" style="color:var(--cyan)"></i>
-            <div style="font-size:2rem; color:var(--cyan)"><i class="fas fa-microchip"></i> CPU</div>
-        </div>
-        <ul style="font-size:0.9rem"><li>Decides which process runs next</li><li>Maximizes CPU utilization</li></ul>`
-    },
-    {
-        num: 21, section: "CPU SCHED", duration: 10,
-        text: "There are several algorithms — First Come First Serve, Shortest Job First, Priority scheduling, and Round Robin, which gives each process a time slice. Round Robin is super popular!",
-        mascot: "lecturing", heading: "Scheduling Algorithms",
-        html: `<table class="algo-table">
-            <tr><th>FCFS</th><td>First in, first served</td></tr>
-            <tr><th>SJF</th><td>Shortest job first</td></tr>
-            <tr><th>Priority</th><td>Highest priority first</td></tr>
-            <tr class="highlight-row"><th>Round Robin</th><td>Time slice for each (★)</td></tr>
-        </table>`
-    },
-    {
-        num: 22, section: "CPU SCHED", duration: 10,
-        text: "In preemptive scheduling, the OS can interrupt a running process for a higher-priority one. In non-preemptive, the process runs until it finishes or voluntarily gives up the CPU!",
-        mascot: "lecturing", heading: "Preemptive vs Non-Preemptive",
-        html: `<div class="comparison">
-            <div class="compare-panel" style="border-color:#f87171"><h3>Preemptive</h3><p style="font-size:0.8rem;text-align:center">OS can interrupt processes</p></div>
-            <div class="compare-panel" style="border-color:#4ade80"><h3>Non-Preemptive</h3><p style="font-size:0.8rem;text-align:center">Process runs to completion</p></div>
-        </div>`
-    },
-    {
-        num: 23, section: "DEADLOCK", duration: 10,
-        text: "Deadlock is a nightmare scenario! Two or more processes are stuck, each waiting for a resource the other holds. Nobody can move — it's a total traffic jam!",
-        mascot: "shocked", heading: "What is a Deadlock?",
-        html: `<div class="deadlock-visual">
-            <div class="process-circle" style="background:rgba(239,68,68,0.2); border:2px solid #f87171">P1</div>
-            <i class="fas fa-sync fa-spin" style="font-size:2rem; color:#f87171"></i>
-            <div class="process-circle" style="background:rgba(239,68,68,0.2); border:2px solid #f87171">P2</div>
-        </div>
-        <p class="highlight" style="text-align:center; color:#f87171">No progress possible!</p>`
-    },
-    {
-        num: 24, section: "DEADLOCK", duration: 10,
-        text: "Deadlock needs ALL four conditions: Mutual Exclusion — only one can use a resource, Hold and Wait, No Preemption, and Circular Wait. Break any one, and deadlock is avoided!",
-        mascot: "confident", heading: "4 Conditions for Deadlock",
-        html: `<p style="text-align:center; font-size:0.8rem; color:#aaa; margin-bottom:1rem">(ALL must hold)</p>
-        <ol style="margin-left:2rem; font-weight:bold; color:#f87171">
-            <li>Mutual Exclusion</li><li>Hold & Wait</li><li>No Preemption</li><li>Circular Wait</li>
-        </ol>`
-    },
-    {
-        num: 25, section: "DEADLOCK", duration: 10,
-        text: "We handle deadlocks in three ways — Prevention by breaking conditions, Avoidance using the Banker's Algorithm, or Detection and Recovery after it happens!",
-        mascot: "confident", heading: "Handling Deadlocks",
-        html: `<ul>
-            <li><i class="fas fa-shield-halved" style="color:var(--cyan);width:20px"></i> Prevention</li>
-            <li><i class="fas fa-university" style="color:var(--cyan);width:20px"></i> Avoidance (Banker's)</li>
-            <li><i class="fas fa-search" style="color:var(--cyan);width:20px"></i> Detection & Recovery</li>
-        </ul>`
-    },
-    {
-        num: 26, section: "SYNCHRONIZATION", duration: 10,
-        text: "When multiple processes access shared data, chaos can happen! Synchronization ensures only one process enters the critical section at a time — preventing race conditions!",
-        mascot: "angry", heading: "Process Synchronization",
-        html: `<div style="background:rgba(239,68,68,0.1); border:2px dashed #f87171; padding:1rem; text-align:center; border-radius:8px; margin-bottom:1rem; color:#f87171; font-weight:bold">Critical Section</div>
-        <ul><li>Protects shared resources</li><li>Only one process at a time</li><li>Prevents race conditions</li></ul>`
-    },
-    {
-        num: 27, section: "SYNCHRONIZATION", duration: 10,
-        text: "The key tools are — Mutex, a simple lock for one process, Semaphores with a counter for multiple resources, and Monitors that combine locking with condition variables!",
-        mascot: "lecturing", heading: "Synchronization Tools",
-        html: `<div style="display:flex; flex-direction:column; gap:1rem; margin-top:1rem">
-            <div><strong><i class="fas fa-lock" style="color:var(--cyan)"></i> Mutex</strong> <br><span style="font-size:0.8rem;color:#aaa">Binary lock (0 or 1)</span></div>
-            <div><strong><i class="fas fa-traffic-light" style="color:var(--cyan)"></i> Semaphore</strong> <br><span style="font-size:0.8rem;color:#aaa">Counter-based signaling</span></div>
-            <div><strong><i class="fas fa-box" style="color:var(--cyan)"></i> Monitor</strong> <br><span style="font-size:0.8rem;color:#aaa">High-level construct</span></div>
-        </div>`
-    },
-    {
-        num: 28, section: "TYPES OF OS", duration: 10,
-        text: "There are several types of OS! Batch OS processes jobs in groups, Time-Sharing lets multiple users share the CPU, Real-Time OS handles time-critical tasks, and Distributed OS spans multiple machines!",
-        mascot: "happy", heading: "Types of OS",
-        html: `<div class="quadrant-grid">
-            <div class="quadrant"><i class="fas fa-layer-group"></i><span>Batch</span></div>
-            <div class="quadrant"><i class="fas fa-clock"></i><span>Time-Sharing</span></div>
-            <div class="quadrant"><i class="fas fa-tachometer-alt"></i><span>Real-Time</span></div>
-            <div class="quadrant"><i class="fas fa-network-wired"></i><span>Distributed</span></div>
-        </div>`
-    },
-    {
-        num: 29, section: "TYPES OF OS", duration: 10,
-        text: "In the real world — desktops run Windows, macOS, or Linux; phones run Android or iOS; embedded devices use RTOS; and cloud infrastructure uses distributed systems. OS is everywhere!",
-        mascot: "confident", heading: "Modern OS in Action",
-        html: `<table class="algo-table">
-            <tr><th>Desktop</th><td>Windows, macOS, Linux</td></tr>
-            <tr><th>Mobile</th><td>Android, iOS</td></tr>
-            <tr><th>Embedded</th><td>RTOS</td></tr>
-            <tr><th>Cloud</th><td>Distributed OS</td></tr>
-        </table>`
-    },
-    {
-        num: 30, section: "CONCLUSION", duration: 10,
-        text: "And that's Operating Systems in five minutes! We covered the OS, its functions, processes, memory, file systems, scheduling, deadlocks, synchronization, and OS types. You've got this, REC! Aadhi believes in you — go ace that exam! 💪",
-        mascot: "celebrating success", heading: "That's a Wrap! 🎉",
-        html: `<div style="text-align:center; font-size:4rem; margin-top:2rem; animation:pulseGlow 2s infinite">💯</div>`
     }
 ];
 
@@ -413,7 +278,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Loop through all scenes to build timeline
         scenes.forEach((scene, index) => {
-            const startTime = index * 10; // 10 seconds per scene
+            const startTime = index * 20; // 20 seconds per scene
             
             // 1. Play Narration & Subtitles
             mainTimeline.call(() => {
@@ -438,14 +303,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const isZoomIn = index % 2 === 0;
             mainTimeline.fromTo(cameraContainer, 
                 { scale: isZoomIn ? 1 : 1.15, x: isZoomIn ? 0 : (index%3===0?-20:20) }, 
-                { scale: isZoomIn ? 1.15 : 1, x: isZoomIn ? (index%3===0?-20:20) : 0, duration: 10, ease: "none" }, 
+                { scale: isZoomIn ? 1.15 : 1, x: isZoomIn ? (index%3===0?-20:20) : 0, duration: 20, ease: "none" }, 
                 startTime
             );
 
             // 3. Exit animations before next scene
             if (index < scenes.length - 1) {
-                mainTimeline.to(hologram, { opacity:0, scale:0.9, y:-20, duration:0.5, ease:"power2.in" }, startTime + 9.5);
-                mainTimeline.to(sceneHeading, { opacity:0, y:20, duration:0.5, ease:"power2.in" }, startTime + 9.5);
+                mainTimeline.to(hologram, { opacity:0, scale:0.9, y:-20, duration:0.5, ease:"power2.in" }, startTime + 19.5);
+                mainTimeline.to(sceneHeading, { opacity:0, y:20, duration:0.5, ease:"power2.in" }, startTime + 19.5);
             }
             
             // Special Background Effects triggers
@@ -507,7 +372,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const progress = mainTimeline.progress();
         progressBar.style.width = `${progress * 100}%`;
         
-        const totalSeconds = Math.floor(progress * scenes.length * 10);
+        const totalSeconds = Math.floor(progress * scenes.length * 20);
         const m = Math.floor(totalSeconds / 60);
         const s = String(totalSeconds % 60).padStart(2, '0');
         progressTime.textContent = `${m}:${s} / 5:00`;
@@ -535,20 +400,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     prevSceneBtn.addEventListener('click', () => {
         if (!mainTimeline) return;
-        let currentSceneIndex = Math.floor(mainTimeline.time() / 10);
+        let currentSceneIndex = Math.floor(mainTimeline.time() / 20);
         if (currentSceneIndex > 0) {
             if (synth) synth.cancel();
-            mainTimeline.seek((currentSceneIndex - 1) * 10);
+            mainTimeline.seek((currentSceneIndex - 1) * 20);
             if (!isPaused) mainTimeline.play();
         }
     });
 
     nextSceneBtn.addEventListener('click', () => {
         if (!mainTimeline) return;
-        let currentSceneIndex = Math.floor(mainTimeline.time() / 10);
+        let currentSceneIndex = Math.floor(mainTimeline.time() / 20);
         if (currentSceneIndex < scenes.length - 1) {
             if (synth) synth.cancel();
-            mainTimeline.seek((currentSceneIndex + 1) * 10);
+            mainTimeline.seek((currentSceneIndex + 1) * 20);
             if (!isPaused) mainTimeline.play();
         }
     });
